@@ -69,7 +69,7 @@ moonmap <- ggplot() +
 
 scaled<-moonmap +
   scale_size("Number of Games", range = c(5,12), breaks = 2^(1:3)) +coord_equal() +
-  labs(title="Home ODI Games for India", subtitle = "The location and percentage of home games <b><span style='color:#8c182b'>won</span></b> by the Indian Circket team.") +
+  labs(title="Home ODI Games for India", subtitle = "The location and percentage of home games <b><span style='color:#8c182b'>won</span></b> by the Indian Cricket team.") +
   theme(plot.subtitle = element_markdown())
 
 cowplot::save_plot("India_Test_Moon.pdf", scaled, base_width = 8, base_height = 8)

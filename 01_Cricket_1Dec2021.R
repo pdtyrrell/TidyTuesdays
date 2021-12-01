@@ -44,6 +44,7 @@ citmatch<-mactsums %>%
 
 # Create a plot -----------------------------------------------------------
 
+library(ggtext)
 
 moonmap <- ggplot() +
   geom_polygon(
@@ -54,11 +55,11 @@ moonmap <- ggplot() +
   ) +
   geom_moon(data = citmatch,
     aes(x = longitude, y= latitude, ratio = Percent_Home_Win, size = Total_Games),
-    right = FALSE, fill = "dark green", color = "dark green",
+    right = FALSE, fill = "#8c182b", color = "white",
     key_glyph = draw_key_moon_left) +
   geom_moon(data = citmatch,
             aes(x = longitude, y= latitude, ratio = 1-Percent_Home_Win, size = Total_Games),
-           fill = "dark red", color = "black") +
+           fill = "black", color = "white") +
   cowplot::theme_map() +
   theme(
     legend.position = c(0.05, 0.05),
@@ -66,6 +67,9 @@ moonmap <- ggplot() +
     legend.justification = c(0, 0)
   )
 
-moonmap +
-  scale_size("size", range = c(4,10), breaks = 2^(1:3)) +coord_equal()
-  
+scaled<-moonmap +
+  scale_size("Number of Games", range = c(5,12), breaks = 2^(1:3)) +coord_equal() +
+  labs(title="Home ODI Games for India", subtitle = "The location and percentage of home games <b><span style='color:#8c182b'>won</span></b> by the Indian Circket team.") +
+  theme(plot.subtitle = element_markdown())
+
+cowplot::save_plot("India_Test_Moon.pdf", scaled, base_width = 8, base_height = 8)
